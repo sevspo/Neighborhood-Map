@@ -1,6 +1,6 @@
 [
   {
-    "name": "Kapitel",
+    "title": "Kapitel",
     "street": "Bollwerk 41",
     "city": "Bern",
     "state": "Bern",
@@ -12,7 +12,7 @@
     "placeId": "ChIJGWSmlb85jkcR1QO3_6igsCE"
   },
   {
-    "name": "Stufenbau Event Location",
+    "title": "Stufenbau Event Location",
     "street": "Pulverstrasse 8",
     "city": "Ittigen",
     "state": "Bern",
@@ -24,7 +24,7 @@
     "placeId": "ChIJIyUH6wY6jkcRjgUX2k5Fmoc"
   },
   {
-    "name": "Marzili Public Open-Air Pool",
+    "title": "Marzili Public Open-Air Pool",
     "street": "Marzilistrasse 29",
     "city": "Bern",
     "state": "Bern",
@@ -36,8 +36,8 @@
     "placeId": "ChIJP-X3iMg5jkcRftert7Z3TKs"
   },
   {
-    "name": "The Rose Garden",
-    "street": " Aargauerstalden 31B",
+    "title": "The Rose Garden",
+    "street": "Aargauerstalden 31B",
     "city": "Bern",
     "state": "Bern",
     "zip": "3006",
@@ -48,7 +48,7 @@
     "placeId": "ChIJA7Gr8N05jkcRFuz2DUloIRw"
   },
   {
-    "name": "Bundeshaus",
+    "title": "Bundeshaus",
     "street": "Bundeshausplatz 3",
     "city": "Bern",
     "state": "Bern",
