@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
-
 class Map extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <main>
+        <div id="map"></div>
+      </main>
     )
   }
 }
