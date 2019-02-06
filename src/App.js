@@ -9,14 +9,19 @@ class App extends Component {
   state = {
     center: {lat: 46.954578, lng: 7.469964},
     zoom: 13,
-    locations: locations
+    locations: locations,
+    map: null,
+    markers: [],
+    infoWindow: null
   }
 
   componentDidMount() {
     helpers.getGoogleMaps()
     .then((google) => {
-      console.log(this.state.locations);
-      this.map = new google.maps.Map(document.getElementById('map'), {
+      //console.log(this.state.locations);
+      const markers = [];
+      const infoWindow = new google.maps.InfoWindow();
+      const map = new google.maps.Map(document.getElementById('map'), {
         center: this.state.center,
         zoom: this.state.zoom,
         //styles: styles,
@@ -27,19 +32,36 @@ class App extends Component {
         let position = this.state.locations[i].pos;
         let title = this.state.locations[i].title;
         // Create a marker per location, and put into markers array.
-        this.marker = new google.maps.Marker({
+        let marker = new google.maps.Marker({
           position: position,
           title: title,
-          map: this.map,
+          map: map,
           animation: google.maps.Animation.DROP,
           //icon: defaultIcon,
           id: i
         });
+        markers.push(marker)
+        //console.log(this)
+
+        marker.addListener('click', function() {
+          //this.populateInfoWindow(this, infoWindow)
+        })
       }
+      this.setState({
+        map,
+        markers,
+        infoWindow
+      })
     })
   }
 
+  populateInfoWindow  = (marker, infoWindow) => {
+    console.log('hello from within the pop func')
+    console.log(this)
+  }
+
   render() {
+    console.log(this.state.markers, this.state.map)
     return (
       <div className="App">
         <header className="App-header">
