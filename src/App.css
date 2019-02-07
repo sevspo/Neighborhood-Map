@@ -9,8 +9,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 0vmin);
   color: white;
+}
+
+.sidenav {
+  color: white;
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 10vh;
+  left: 0;
+  background-color: #282c34;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
 #map {

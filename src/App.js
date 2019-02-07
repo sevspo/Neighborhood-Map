@@ -38,14 +38,16 @@ class App extends Component {
           map: map,
           animation: google.maps.Animation.DROP,
           //icon: defaultIcon,
-          id: i
+          id: i,
+          //visible: false
         });
+
+        marker.addListener('click', this.populateInfoWindow);
+        
+
         markers.push(marker)
         //console.log(this)
 
-        marker.addListener('click', function() {
-          //this.populateInfoWindow(this, infoWindow)
-        })
       }
       this.setState({
         map,
@@ -55,20 +57,27 @@ class App extends Component {
     })
   }
 
-  populateInfoWindow  = (marker, infoWindow) => {
-    console.log('hello from within the pop func')
-    console.log(this)
+  populateInfoWindow (e) {
+    
+    console.log('hi I am "This"', this)
+    console.log('hi I am "e"', e.target)
+    
+
   }
 
   render() {
-    console.log(this.state.markers, this.state.map)
+    //console.log(this.state.markers, this.state.map)
     return (
       <div className="App">
         <header className="App-header">
           <h1>My Neighborhood</h1>
         </header>
         <Map/>
-        <SideNav/>
+        <SideNav 
+          onClick={this.populateInfoWindow}
+          markers={this.state.markers}
+          locations={this.state.locations}
+        />
       </div>
     );
   }
