@@ -19,10 +19,13 @@ export function getGoogleMaps() {
 export function getFourSquarePlaces() {
   const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB'
   const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H'
-  const qery = 'Top%20Picks'
+  const query = 'Top Picks'
   const city = 'Bern'
-  const limit = 20
+  const limit = 10
   //https://foursquare.com/explore?mode=url&near=Bern%2C%20Switzerland&nearGeoId=72057594040589488&q=Top%20Picks
-  const url = `https://api.foursquare.com/v2/venues/explore?client_id=N1IAMKZUIK1AUHKRFGFBKPQ2YKDSBAKS4NTER5SYZN5CROR1&client_secret=4MKLXVLU2FGZQVRMAEDC15P0TFJGSCY3ZUYUZ0KHQQQLQ5R3&v=20130815%20&limit=50&near=' + city + '&query=' + query + '`
+  const url = `https://api.foursquare.com/v2/venues/explore?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=${limit}&near=${city}&query=${query}`;
+  return fetch(url)
+    .then(res => res.json())
+    .then(res => res.response.groups[0].items)
 }
 

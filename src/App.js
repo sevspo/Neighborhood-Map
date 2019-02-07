@@ -7,7 +7,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    center: {lat: 46.954578, lng: 7.469964},
+    center: {lat: 46.94809, lng: 7.44744},
     zoom: 13,
     locations: locations,
     map: null,
@@ -42,7 +42,7 @@ class App extends Component {
           //visible: false
         });
 
-        marker.addListener('click', this.populateInfoWindow);
+        
         
 
         markers.push(marker)
@@ -55,15 +55,27 @@ class App extends Component {
         infoWindow
       })
     })
+    helpers.getFourSquarePlaces()
+    .then(res => {
+      console.log(res)
+      let venueNames = res.map(e => e.venue.name)
+      console.log(venueNames)
+      let venues = []
+      res.forEach(e => {
+        let obj = { 
+          venue: e.venue.name,
+          lat: e.venue.location.lat,
+          lng: e.venue.location.lng
+        }
+        venues.push(obj)
+      })
+      console.log(venues)
+
+    })
+    .catch(err => console.error(err))
   }
 
-  populateInfoWindow (e) {
-    
-    console.log('hi I am "This"', this)
-    console.log('hi I am "e"', e.target)
-    
-
-  }
+  
 
   render() {
     //console.log(this.state.markers, this.state.map)
