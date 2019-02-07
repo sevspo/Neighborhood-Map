@@ -61,16 +61,16 @@ class App extends Component {
       let venueNames = res.map(e => e.venue.name)
       console.log(venueNames)
       let venues = []
-      res.forEach(e => {
+      res.forEach((e, index) => {
         let obj = { 
-          venue: e.venue.name,
+          name: e.venue.name,
           lat: e.venue.location.lat,
-          lng: e.venue.location.lng
+          lng: e.venue.location.lng,
+          index: index
         }
         venues.push(obj)
       })
       console.log(venues)
-
     })
     .catch(err => console.error(err))
   }
