@@ -9,73 +9,62 @@ class App extends Component {
   state = {
     center: {lat: 46.94809, lng: 7.44744},
     zoom: 13,
-    locations: locations,
+    //locations: locations,
     map: null,
     markers: [],
-    infoWindow: null
+    infoBoxes: []
   }
 
   componentDidMount() {
-    helpers.getGoogleMaps()
-    .then((google) => {
-      //console.log(this.state.locations);
-      const markers = [];
+    const googleMapsPromise = helpers.getGoogleMaps()
+    const fqPlacesPromise = helpers.getFourSquarePlaces()
+    Promise.all([
+      googleMapsPromise,
+      fqPlacesPromise
+    ]).then(values => {
+      const google = values[0]
+      const places = values[1]
+      const markers = []
+      const infoBoxes = []
       const infoWindow = new google.maps.InfoWindow();
       const map = new google.maps.Map(document.getElementById('map'), {
         center: this.state.center,
         zoom: this.state.zoom,
         //styles: styles,
-        //mapTypeControl: false
+        mapTypeControl: false,
+        //scrollwheel: true
       });
-      for (var i = 0; i < this.state.locations.length; i++) {
-        // Get the position from the location array.
-        let position = this.state.locations[i].pos;
-        let title = this.state.locations[i].title;
-        // Create a marker per location, and put into markers array.
+      places.forEach(place => {
         let marker = new google.maps.Marker({
-          position: position,
-          title: title,
+          position: { lat: place.lat, lng: place.lng },
           map: map,
+          //index: place.index,
+          name: place.name,
           animation: google.maps.Animation.DROP,
-          //icon: defaultIcon,
-          id: i,
-          //visible: false
-        });
-
-        
-        
-
+          visible: true,
+          //icon:
+        })
+        let infoWindowContent = `<div>${marker.name}</div>`
+        marker.addListener('click', () => {
+          infoWindow.marker = marker
+          infoWindow.setContent(infoWindowContent)
+          infoWindow.open(map, marker)
+        })
         markers.push(marker)
-        //console.log(this)
-
-      }
+        infoBoxes.push({index: place.index, name: place.name, content: infoWindowContent})
+      })
+      console.log(infoBoxes)
       this.setState({
         map,
         markers,
-        infoWindow
+        infoBoxes
       })
-    })
-    helpers.getFourSquarePlaces()
-    .then(res => {
-      console.log(res)
-      let venueNames = res.map(e => e.venue.name)
-      console.log(venueNames)
-      let venues = []
-      res.forEach((e, index) => {
-        let obj = { 
-          name: e.venue.name,
-          lat: e.venue.location.lat,
-          lng: e.venue.location.lng,
-          index: index
-        }
-        venues.push(obj)
-      })
-      console.log(venues)
-    })
-    .catch(err => console.error(err))
+    }).catch(err => console.error(err))
   }
 
-  
+  populateInfoWindow(marker) {
+    console.log(marker)
+  }
 
   render() {
     //console.log(this.state.markers, this.state.map)
@@ -88,7 +77,7 @@ class App extends Component {
         <SideNav 
           onClick={this.populateInfoWindow}
           markers={this.state.markers}
-          locations={this.state.locations}
+          //locations={this.state.locations}
         />
       </div>
     );

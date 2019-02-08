@@ -22,10 +22,22 @@ export function getFourSquarePlaces() {
   const query = 'Top Picks'
   const city = 'Bern'
   const limit = 10
-  //https://foursquare.com/explore?mode=url&near=Bern%2C%20Switzerland&nearGeoId=72057594040589488&q=Top%20Picks
   const url = `https://api.foursquare.com/v2/venues/explore?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=${limit}&near=${city}&query=${query}`;
   return fetch(url)
     .then(res => res.json())
     .then(res => res.response.groups[0].items)
+    .then(res => {
+      let venues = []
+      res.forEach((elem, index) => {
+        let obj = { 
+          name: elem.venue.name,
+          lat: elem.venue.location.lat,
+          lng: elem.venue.location.lng,
+          index: index
+        }
+        venues.push(obj)
+      })
+      return venues
+    })
 }
 
