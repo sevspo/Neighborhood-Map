@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import locations from './data/locations';
+//import locations from './data/locations';
 import * as helpers from './helperFunc.js'
 import Map from './components/Map';
 import SideNav from './components/SideNav'
@@ -12,7 +12,10 @@ class App extends Component {
     //locations: locations,
     map: null,
     markers: [],
-    infoBoxes: []
+    infoBoxes: [],
+    places: [],
+    query: '',
+    filteredPlaces: null
   }
 
   componentDidMount() {
@@ -53,17 +56,28 @@ class App extends Component {
         markers.push(marker)
         infoBoxes.push({index: place.index, name: place.name, content: infoWindowContent})
       })
-      console.log(infoBoxes)
+      //console.log(infoBoxes)
       this.setState({
         map,
         markers,
-        infoBoxes
+        infoBoxes,
+        places
       })
     }).catch(err => console.error(err))
   }
 
-  populateInfoWindow(marker) {
-    console.log(marker)
+  filterPlaces = (query) => {
+    let filteredPlaces = query ? this.state.places.filter(place => place.name.toLowerCase().includes(query)) : this.state.places
+    console.log(filteredPlaces)
+    this.setState({
+      query,
+      filteredPlaces
+    })
+  }
+
+  listElemClick = (place) => {
+
+    //console.log(place)
   }
 
   render() {
@@ -75,8 +89,10 @@ class App extends Component {
         </header>
         <Map/>
         <SideNav 
-          onClick={this.populateInfoWindow}
-          markers={this.state.markers}
+          listElemClick={this.listElemClick}
+          places={this.state.filteredPlaces ? this.state.filteredPlaces: this.state.places}
+          filterPlaces={this.filterPlaces}
+          query={this.state.query}
           //locations={this.state.locations}
         />
       </div>

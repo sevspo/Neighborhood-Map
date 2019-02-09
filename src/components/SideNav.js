@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 class SideNav extends Component {
 
   render() {
-    //console.log(this.props.locations)
+    
     return (
       <div className='sidenav'>
         <h2>Locations</h2>
+        <input type='text' className="filter-input" placeholder="Filter Venues" //TODO: Aria
+          value={this.props.query} onChange={(event) => { this.props.filterPlaces(event.target.value) }}/>
         <ol className="location-list" >
         {
-          this.props.markers.map((marker, key) => <li onClick={() =>{this.props.onClick(marker)}} key={key}>{marker.name}</li>)
+          this.props.places.map((place, key) => <li onClick={() =>{this.props.listElemClick(place)}} key={key}>{place.name}</li>)
         }
         </ol>
       </div>
