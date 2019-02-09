@@ -67,17 +67,21 @@ class App extends Component {
       })
     }).catch(err => console.error(err))
   }
-
+  
   filterPlaces = (query) => {
+    let closeInfowindow = this.state.infoWindow
+    closeInfowindow.close()
     this.state.infoWindow.close()
+    let filteredMarkers = this.state.markers
     let filteredPlaces = query ? this.state.places.filter(place => place.name.toLowerCase().includes(query.toLowerCase())) : this.state.places
-    this.state.markers.forEach(marker => {
+    filteredMarkers.forEach(marker => {
       marker.name.toLowerCase().includes(query.toLowerCase()) ? marker.setVisible(true) : marker.setVisible(false);
     })
-
     this.setState({
       query,
-      filteredPlaces
+      filteredPlaces,
+      markers: filteredMarkers,
+      infoWindow: closeInfowindow
     })
   }
 
@@ -85,10 +89,13 @@ class App extends Component {
     let selectedMarker = this.state.markers.filter(marker => marker.name === place.name)[0]
     let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.name ===place.name)[0]
     //ToDo do via setState, or define with local properies
-    this.state.infoWindow.setContent(selectedInfobox.content)
-    this.state.infoWindow.marker = selectedMarker
-    this.state.infoWindow.open(this.state.map, selectedMarker)
-    
+    let updatedInfoWindow = this.state.infoWindow
+    updatedInfoWindow.setContent(selectedInfobox.content)
+    updatedInfoWindow.marker = selectedMarker
+    updatedInfoWindow.open(this.state.map, selectedMarker)
+    this.setState({
+      infoWindow: updatedInfoWindow
+    })
   }
 
   render() {
