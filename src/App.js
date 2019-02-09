@@ -13,6 +13,7 @@ class App extends Component {
     map: null,
     markers: [],
     infoBoxes: [],
+    infoWindow: null,
     places: [],
     query: '',
     filteredPlaces: null
@@ -61,23 +62,33 @@ class App extends Component {
         map,
         markers,
         infoBoxes,
-        places
+        places,
+        infoWindow
       })
     }).catch(err => console.error(err))
   }
 
   filterPlaces = (query) => {
-    let filteredPlaces = query ? this.state.places.filter(place => place.name.toLowerCase().includes(query)) : this.state.places
-    console.log(filteredPlaces)
+    this.state.infoWindow.close()
+    let filteredPlaces = query ? this.state.places.filter(place => place.name.toLowerCase().includes(query.toLowerCase())) : this.state.places
+    this.state.markers.forEach(marker => {
+      marker.name.toLowerCase().includes(query.toLowerCase()) ? marker.setVisible(true) : marker.setVisible(false);
+    })
+
     this.setState({
       query,
       filteredPlaces
     })
   }
 
-  listElemClick = (place) => {
-
-    //console.log(place)
+  listItemClick = (place) => {
+    let selectedMarker = this.state.markers.filter(marker => marker.name === place.name)[0]
+    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.name ===place.name)[0]
+    //ToDo do via setState, or define with local properies
+    this.state.infoWindow.setContent(selectedInfobox.content)
+    this.state.infoWindow.marker = selectedMarker
+    this.state.infoWindow.open(this.state.map, selectedMarker)
+    
   }
 
   render() {
@@ -89,7 +100,7 @@ class App extends Component {
         </header>
         <Map/>
         <SideNav 
-          listElemClick={this.listElemClick}
+          listItemClick={this.listItemClick}
           places={this.state.filteredPlaces ? this.state.filteredPlaces: this.state.places}
           filterPlaces={this.filterPlaces}
           query={this.state.query}
