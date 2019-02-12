@@ -27,17 +27,19 @@ export function getFourSquarePlaces() {
     .then(res => res.json())
     .then(res => res.response.groups[0].items)
     .then(res => {
-      let venues = []
+      let places = []
       res.forEach((elem, index) => {
         let obj = { 
           name: elem.venue.name,
           lat: elem.venue.location.lat,
           lng: elem.venue.location.lng,
-          index: index
+          index: index,
+          fsID: elem.venue.id
         }
-        venues.push(obj)
+        places.push(obj)
       })
-      return venues
+      console.log(places)
+      return places
     })
 }
 
