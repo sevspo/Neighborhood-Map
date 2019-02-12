@@ -50,9 +50,7 @@ class App extends Component {
         })
         let infoWindowContent = `<div>${marker.name}</div>`
         marker.addListener('click', () => {
-          infoWindow.marker = marker
-          infoWindow.setContent(infoWindowContent)
-          infoWindow.open(map, marker)
+          this.showInfoWindow(marker, infoWindowContent)
         })
         markers.push(marker)
         infoBoxes.push({index: place.index, name: place.name, content: infoWindowContent})
@@ -71,7 +69,6 @@ class App extends Component {
   filterPlaces = (query) => {
     let closeInfowindow = this.state.infoWindow
     closeInfowindow.close()
-    this.state.infoWindow.close()
     let filteredMarkers = this.state.markers
     let filteredPlaces = query ? this.state.places.filter(place => place.name.toLowerCase().includes(query.toLowerCase())) : this.state.places
     filteredMarkers.forEach(marker => {
@@ -85,17 +82,20 @@ class App extends Component {
     })
   }
 
-  listItemClick = (place) => {
-    let selectedMarker = this.state.markers.filter(marker => marker.name === place.name)[0]
-    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.name ===place.name)[0]
-    //ToDo do via setState, or define with local properies
+  showInfoWindow = (marker, infoWindowContent) => {
     let updatedInfoWindow = this.state.infoWindow
-    updatedInfoWindow.setContent(selectedInfobox.content)
-    updatedInfoWindow.marker = selectedMarker
-    updatedInfoWindow.open(this.state.map, selectedMarker)
+    updatedInfoWindow.marker = marker
+    updatedInfoWindow.setContent(infoWindowContent)
+    updatedInfoWindow.open(this.state.map, marker)
     this.setState({
       infoWindow: updatedInfoWindow
     })
+  }
+
+  listItemClick = (place) => {
+    let selectedMarker = this.state.markers.filter(marker => marker.name === place.name)[0]
+    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.name ===place.name)[0]
+    this.showInfoWindow(selectedMarker, selectedInfobox.content)
   }
 
   render() {
