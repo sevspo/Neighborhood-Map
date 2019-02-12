@@ -38,8 +38,17 @@ export function getFourSquarePlaces() {
         }
         places.push(obj)
       })
-      console.log(places)
+      
       return places
-    })
+    }).catch(err => console.error('FS Fetch Error: ' + err))
+    
+    /* .then(places => {
+      places.map(place => {
+        let url = `https://api.foursquare.com/v2/venues/${place.fsID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
+        fetch(url)
+        .then(res => res.json())
+        .then(res => console.log(res))
+      })
+    }) */
 }
 
