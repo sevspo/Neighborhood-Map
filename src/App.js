@@ -8,7 +8,7 @@ import './App.css';
 class App extends Component {
   state = {
     center: {lat: 46.94809, lng: 7.44744},
-    zoom: 13,
+    zoom: 14,
     //locations: locations,
     map: null,
     markers: [],
@@ -42,7 +42,7 @@ class App extends Component {
         let marker = new google.maps.Marker({
           position: { lat: place.lat, lng: place.lng },
           map: map,
-          //index: place.index,
+          index: place.index,
           name: place.name,
           animation: google.maps.Animation.DROP,
           visible: true,
@@ -93,8 +93,9 @@ class App extends Component {
   }
 
   listItemClick = (place) => {
-    let selectedMarker = this.state.markers.filter(marker => marker.name === place.name)[0]
-    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.name ===place.name)[0]
+    console.log(place)
+    let selectedMarker = this.state.markers.filter(marker => marker.index === place.index)[0]
+    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.index ===place.index)[0]
     this.showInfoWindow(selectedMarker, selectedInfobox.content)
   }
 
