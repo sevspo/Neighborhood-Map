@@ -17,13 +17,19 @@
   color: white;
   height: 100%;
   position: fixed;
+  max-width: 100%;
   z-index: 1;
   top: 10vh;
   left: 0;
   background-color: #282c34;
   overflow-x: hidden;
   padding-top: 20px;
-  transition: 0.5s;
+  transition: 0.3s;
+}
+
+.listelement-button {
+  display: block;
+  width: 200px
 }
 
 .open {
