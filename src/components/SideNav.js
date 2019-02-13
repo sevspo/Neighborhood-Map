@@ -12,7 +12,11 @@ class SideNav extends Component {
           value={this.props.query} onChange={(event) => { this.props.filterPlaces(event.target.value) }}/>
         <ol className="location-list" >
         {
-          this.props.places.map((place, key) => <li onClick={() =>{this.props.listItemClick(place)}} key={key}>{place.name}</li>)
+          this.props.places.map((place, key) => (
+           <li className='listelement' key={key}>
+            <button onClick={() =>{this.props.listItemClick(place)}} className="listelement-button">{place.name}</button>
+           </li>) 
+          )
         }
         </ol>
       </div>

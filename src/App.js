@@ -102,7 +102,6 @@ class App extends Component {
 
   toggleSidenav = () => {
     let toggle = this.state.sideNavOpen === 'open' ? 'hidden' : 'open'
-    
     this.setState({
       sideNavOpen: toggle
     })
