@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+/*************** Header ***************/
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -9,9 +10,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 0vmin);
+  font-size: 1em;
   color: white;
 }
+
+.App-header h1 {
+  font-weight: 600;
+}
+
+.open-button {
+  cursor: pointer;
+ 
+}
+
+/*************** SideNavigation ***************/
 
 .sidenav {
   color: white;
@@ -27,7 +39,12 @@
   transition: 0.3s;
 }
 
+.close-button {
+  cursor: pointer;
+}
+
 .listelement-button {
+  cursor: pointer;
   display: block;
   width: 200px
 }
@@ -44,3 +61,4 @@
   height: 90vh;
 }
 
+/*************** Infowindow ***************/

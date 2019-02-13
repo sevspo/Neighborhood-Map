@@ -24,6 +24,7 @@ export function getFourSquarePlaces() {
   const limit = 2
   const url = `https://api.foursquare.com/v2/venues/explore?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=${limit}&near=${city}&query=${query}`;
   return fetch(url)
+  
     .then(res => res.json())
     .then(res => res.response.groups[0].items)
     .then(res => {

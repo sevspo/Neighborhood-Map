@@ -67,7 +67,10 @@ class App extends Component {
         places,
         infoWindow
       })
-    }).catch(err => console.error('Error Main Promise: ' + err))
+    }).catch(err => {
+      //alert('We are very sorry, but the server cannot be reached at the moment')
+      console.error('Main Promise Error: ' + err)
+    })
   }
   
   filterPlaces = (query) => {
@@ -121,7 +124,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <button onClick={this.toggleSidenav} className="close-button">&#9776;</button>
+          <button onClick={this.toggleSidenav} className="open-button">&#9776;</button>
           <h1>My Neighborhood</h1>
         </header>
         <Map/>
