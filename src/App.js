@@ -49,7 +49,10 @@ class App extends Component {
           visible: true,
           //icon:
         })
-        let infoWindowContent = `<div>${marker.name}</div>`
+        let infoWindowContent = `<div class='info-box'>
+        <h3 class='infobox-title'>${marker.name}</h3>
+        <img alt='${marker.name}' src='${place.photoURL}'/>
+        </div>`
         marker.addListener('click', () => {
           this.showInfoWindow(marker, infoWindowContent)
         })
@@ -64,7 +67,7 @@ class App extends Component {
         places,
         infoWindow
       })
-    }).catch(err => console.error('Error Promise.all : ' + err))
+    }).catch(err => console.error('Error Main Promise: ' + err))
   }
   
   filterPlaces = (query) => {
@@ -94,7 +97,7 @@ class App extends Component {
   }
 
   listItemClick = (place) => {
-    console.log(place)
+    //console.log(place)
     let selectedMarker = this.state.markers.filter(marker => marker.index === place.index)[0]
     let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.index ===place.index)[0]
     this.showInfoWindow(selectedMarker, selectedInfobox.content)
