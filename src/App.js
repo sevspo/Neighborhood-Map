@@ -63,7 +63,7 @@ class App extends Component {
         places,
         infoWindow
       })
-    }).catch(err => console.error(err))
+    }).catch(err => console.error('Error Promise.all : ' + err))
   }
   
   filterPlaces = (query) => {
