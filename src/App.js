@@ -91,6 +91,12 @@ class App extends Component {
     updatedInfoWindow.marker = marker
     updatedInfoWindow.setContent(infoWindowContent)
     updatedInfoWindow.open(this.state.map, marker)
+    if (marker.getAnimation() !== null) {
+       marker.setAnimation(null);
+    } else {
+      marker.setAnimation(this.google.maps.Animation.BOUNCE);
+    }
+    setTimeout(() => { marker.setAnimation(null) }, 1500);
     this.setState({
       infoWindow: updatedInfoWindow
     })
