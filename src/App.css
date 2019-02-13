@@ -16,7 +16,6 @@
 .sidenav {
   color: white;
   height: 100%;
-  width: 280px;
   position: fixed;
   z-index: 1;
   top: 10vh;
@@ -24,6 +23,15 @@
   background-color: #282c34;
   overflow-x: hidden;
   padding-top: 20px;
+  transition: 0.5s;
+}
+
+.open {
+  width: 280px
+}
+
+.hidden {
+  width: 0px
 }
 
 #map {

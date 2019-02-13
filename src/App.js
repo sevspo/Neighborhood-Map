@@ -16,7 +16,8 @@ class App extends Component {
     infoWindow: null,
     places: [],
     query: '',
-    filteredPlaces: null
+    filteredPlaces: null,
+    sideNavOpen: 'open'
   }
 
   componentDidMount() {
@@ -99,15 +100,26 @@ class App extends Component {
     this.showInfoWindow(selectedMarker, selectedInfobox.content)
   }
 
+  toggleSidenav = () => {
+    let toggle = this.state.sideNavOpen === 'open' ? 'hidden' : 'open'
+    
+    this.setState({
+      sideNavOpen: toggle
+    })
+  }
+
   render() {
     //console.log(this.state.markers, this.state.map)
     return (
       <div className="App">
         <header className="App-header">
+          <button onClick={this.toggleSidenav} className="close-button">&#9776;</button>
           <h1>My Neighborhood</h1>
         </header>
         <Map/>
-        <SideNav 
+        <SideNav
+          toggleSidenav={this.toggleSidenav}
+          classNameSidenav={this.state.sideNavOpen}
           listItemClick={this.listItemClick}
           places={this.state.filteredPlaces ? this.state.filteredPlaces: this.state.places}
           filterPlaces={this.filterPlaces}
