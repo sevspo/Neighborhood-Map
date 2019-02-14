@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+/*  This is the map Component, for the sake of proper refactoring  */
 class Map extends Component {
   render() {
     return (
@@ -9,5 +9,4 @@ class Map extends Component {
     )
   }
 }
-
 export default Map

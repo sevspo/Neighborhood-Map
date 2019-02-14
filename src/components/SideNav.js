@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-
+/* This is the Side Navigation Component
+* For the reason of built in A11y features I decided to make buttons instead of regular listelements.
+* 
+*/
 class SideNav extends Component {
-
   render() {
     return (
       <section role='navigation' className={`sidenav ${this.props.classNameSidenav}`}>
@@ -23,5 +25,4 @@ class SideNav extends Component {
     )
   }
 }
-
 export default SideNav

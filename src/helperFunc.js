@@ -1,3 +1,4 @@
+/* This helper function loads the google Maps API */
 export function getGoogleMaps() {
   return new Promise((resolve) => {
     //define the callback that will rund when google maps is loaded
@@ -13,23 +14,23 @@ export function getGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_Key}&callback=resolveGoogleMapsPromise`;
     script.async = true;
     document.body.appendChild(script);
-  }).catch(err => console.error('Google Maps Error: ' + err))
+  })
 }
-
+/* This helper function gets the info from Foursquare for reccomended places.
+* First it gets the places and we extract what we need for this app and also the place id
+* so we can then make a second request to the photos endpoint to retrieve an image url*/
 export function getFourSquarePlaces() {
-  const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB'
-  const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H'
-  const query = 'Top Picks'
-  const city = 'Bern'
-  const limit = 2
+  const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB';
+  const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H';
+  const query = 'Top Picks';
+  const city = 'Bern';
+  const limit = 10; //The number of places to show in the app
   const url = `https://api.foursquare.com/v2/venues/explore?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=${limit}&near=${city}&query=${query}`;
   return fetch(url)
-  
     .then(res => res.json())
     .then(res => res.response.groups[0].items)
     .then(res => {
-      
-      let places = []
+      let places = [];
       res.forEach((elem, index) => {
         let obj = { 
           name: elem.venue.name,
@@ -38,30 +39,28 @@ export function getFourSquarePlaces() {
           index: index,
           fsID: elem.venue.id
         }
-        places.push(obj)
+        places.push(obj);
       })
-      //console.log(res)
-      return places
-    }).catch(err => console.error('FS Fetch Error: ' + err))
+      return places;
+    })
     .then(places => {
-      return Promise.all(
-        places.map(place => {
+      return Promise.all( 
+        places.map(place => { //For each place we make a photo request to the photo endpoint and return the updated places objects array
           let url = `https://api.foursquare.com/v2/venues/${place.fsID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
           return fetch(url)
           .then(res => res.json())
           .then(res => {
-            //console.log(res.response.photos.items[0])  // if res.response.photos.items.length === 0
-            let picObj = res.response.photos.items[0]
-            let fotoURL = `${picObj.prefix}300x300${picObj.suffix}`
+            let picObj = res.response.photos.items[0];
+            //Check if there is at least one image for the location
+            let fotoURL = res.response.photos.items.length === 0 ? '' : `${picObj.prefix}300x300${picObj.suffix}`;
             place = {
               ...place,
               photoURL: fotoURL
             }
-            //console.log(place)
-            return place
+            return place;
           })
         })
-      ).catch(err => console.error('FS Fotos Error: ' + err))
+      )
     })
 }
 
