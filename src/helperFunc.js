@@ -13,7 +13,7 @@ export function getGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_Key}&callback=resolveGoogleMapsPromise`;
     script.async = true;
     document.body.appendChild(script);
-  });
+  }).catch(err => console.error('Google Maps Error: ' + err))
 }
 
 export function getFourSquarePlaces() {
@@ -57,7 +57,7 @@ export function getFourSquarePlaces() {
               ...place,
               photoURL: fotoURL
             }
-            console.log(place)
+            //console.log(place)
             return place
           })
         })
