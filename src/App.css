@@ -2,7 +2,6 @@
   text-align: center;
   box-sizing: border-box;
 }
-
 button {
   cursor: pointer;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -11,25 +10,21 @@ button {
   background: white;
   
 }
-
 button:focus {
   outline-width: 2px;
   outline-color: #0b7afa;
 }
-
 /******************* Header *******************/
 .App-header {
   background-color: #282c34;
   height: 10vh;
   color: white;
 }
-
 .App-header h1 {
   font-weight: 500;
   display: inline-block;
   font-size: 3.5vh;
 }
-
 .open-button {
   float: left;
   position: relative;
@@ -37,15 +32,12 @@ button:focus {
   left: 2vh;
   font-size: 26px;
 }
-
 /********************* Map *********************/
 #map {
   height: 90vh;
   width: 100%;
 }
-
 /*************** SideNavigation ***************/
-
 .sidenav {
   color: white;
   height: 90vh;
@@ -57,58 +49,49 @@ button:focus {
   overflow-x: hidden;
   transition: 0.3s;
 }
-
 .filter-input {
   border-radius: 3px;
   border: none;
-  height: 20px;
+  height: 30px;
   text-align: center;
   font-weight: 500;
 }
-
 .location-list {
   list-style-type: none;
   margin: 50px 0 0;
 }
-
 .sidenav h2 {
   font-weight: 500;
 }
-
 .close-button {
   font-size: 26px;
   position: absolute;
   right: 0px;
 }
-
 .listelement {
   margin: 10px 0;
 }
-
 .listelement-button {
   display: block;
   width: 200px;
   height: 30px;
   font-weight: 500;
 }
-
 .open {
   width: 280px
 }
-
 .hidden {
   width: 0px
 }
-
 .place-attribution {
   font-size: 13px;
   font-weight: 300;
   position: absolute;
   bottom: 5px;
+  width: 280px;
 }
 .place-attribution a {
   font-weight: 500;
   font-size: 15px;
 }
 
-/****************** Infowindow ******************/

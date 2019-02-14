@@ -128,10 +128,9 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <button onClick={this.toggleSidenav} className="open-button">&#9776;</button>
+          <button aria-label='open sidebar' onClick={this.toggleSidenav} className="open-button">&#9776;</button>
           <h1>My Neighborhood</h1>
         </header>
-        <Map/>
         <SideNav
           toggleSidenav={this.toggleSidenav}
           classNameSidenav={this.state.sideNavOpen}
@@ -141,6 +140,7 @@ class App extends Component {
           query={this.state.query}
           //locations={this.state.locations}
         />
+        <Map/>
       </div>
     );
   }

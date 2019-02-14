@@ -3,14 +3,13 @@ import React, { Component } from 'react';
 class SideNav extends Component {
 
   render() {
-    
     return (
-      <div className={`sidenav ${this.props.classNameSidenav}`}>
-        <button onClick={this.props.toggleSidenav} className="close-button">&times;</button>
-        <h2>Locations</h2>
-        <input type='text' className="filter-input" placeholder="Filter Venues" //TODO: Aria
+      <section role='navigation' className={`sidenav ${this.props.classNameSidenav}`}>
+        <button aria-label="close sidebar" onClick={this.props.toggleSidenav} className="close-button">&times;</button>
+        <h2>Places</h2>
+        <input type='text' aria-label="search places" className="filter-input" placeholder="Filter Places"
           value={this.props.query} onChange={(event) => { this.props.filterPlaces(event.target.value) }}/>
-        <ol className="location-list" >
+        <ul className="location-list" >
         {
           this.props.places.map((place, key) => (
            <li className='listelement' key={key}>
@@ -18,8 +17,9 @@ class SideNav extends Component {
            </li>) 
           )
         }
-        </ol>
-      </div>
+        </ul>
+        <p className="place-attribution">venue reccomendations and pictures provided by <a href="https://foursquare.com/de">Foursquare</a></p>
+      </section>
     )
   }
 }
