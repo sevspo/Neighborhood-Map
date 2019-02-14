@@ -1,0 +1,74 @@
+[
+  {
+    "fsID": "4bd42083b221c9b64911dbd0",
+    "index": 0,
+    "lat": 46.95125227869199,
+    "lng": 7.460301648497049,
+    "name": "Rosengarten",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/2789219_mpLB98eJmSbD0zx5Vb3DBEP8GfudILcoRdzfvItCv0A.jpg"
+  },
+  {
+    "fsID": "4bfa81b85ec320a1ffb38bd3",
+    "index": 1,
+    "lat": 46.94683345082604,
+    "lng": 7.452286425071624,
+    "name": "Münsterplattform",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/235935_Qxv7iLLFCxxHWF6yz56Bv4VfKslKW58fb5hsZS6PFXw.jpg"
+  },
+  {
+    "fsID": "4b768892f964a520d5502ee3",
+    "index": 2,
+    "lat": 46.94791350008228,
+    "lng": 7.447427505739073,
+    "name": "Adriano's Bar & Café",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/4UQDFMXCQ15RTJ4JMY5XOBH12ESJBQ4CZW2IAHE55X31VFCU.jpg"
+  },
+  {
+    "fsID": "4b6b28aff964a52094f62be3",
+    "index": 3,
+    "lat": 46.947414060119144,
+    "lng": 7.443817244257114,
+    "name": "Bundesplatz",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/5FMrw2_ridh7o2fiGnTi2x4ycTxguJ5nwivl2Ki-rQs.jpg"
+  },
+  {
+    "fsID": "4b8862b9f964a520f3f331e3",
+    "index": 4,
+    "lat": 46.95028381074724,
+    "lng": 7.443385325664617,
+    "name": "Café-Bar Turnhalle",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/47337551_77I8M9EiTgwlzdBOX8PL5dH_2bxPwGfZxhKf4azBz54.jpg"
+  },
+  {
+    "fsID": "4df33d9aaeb7170aa2f04a78",
+    "index": 5,
+    "lat": 46.94755014794438,
+    "lng": 7.44999349960001,
+    "name": "Café Einstein",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/2dDv-Q0aMmwoUD-qo7A68z9WHHypoeUxB5j-T13OUSY.jpg"
+  },
+  {
+    "fsID": "529b729211d24f84258b37f5",
+    "index": 6,
+    "lat": 46.94850030773872,
+    "lng": 7.448936357018215,
+    "name": "Biercafe au Trappiste",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/18022653_hzNOeZNNksys9USc3gqhEkaYnMpDrLjfL8DcO2uMBYI.jpg"
+  },
+  {
+    "fsID": "502fa589e4b0beacbe4453a7",
+    "index": 7,
+    "lat": 46.957962777053254,
+    "lng": 7.436702446454001,
+    "name": "Apfelgold - desserts et livres",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/137136306_W1lZY1DYGrSaoLIWhUk5JlZ5BZlY9cSJIuPQKaX8Pro.jpg"
+  },
+  {
+    "fsID": "4e3d5d9dae60454236639c77",
+    "index": 8,
+    "lat": 46.95664202357799,
+    "lng": 7.444877711935867,
+    "name": "wartsaal | kaffee bar bücher",
+    "photoURL": "https://fastly.4sqi.net/img/general/300x300/8m-sPstYtcK40rFWGEDfhbHXIFf_qoL50Hujc5kjfQ8.jpg"
+  }
+]

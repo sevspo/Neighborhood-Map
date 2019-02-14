@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import locations from './data/locations';
+import locations from './data/locations2';
 import * as helpers from './helperFunc.js'
 import Map from './components/Map';
 import SideNav from './components/SideNav'
@@ -9,7 +9,7 @@ class App extends Component {
   state = {
     center: {lat: 46.94809, lng: 7.44744},
     zoom: 14,
-    //locations: locations,
+    locations: locations,
     map: null,
     markers: [],
     infoBoxes: [],
@@ -18,18 +18,20 @@ class App extends Component {
     query: '',
     filteredPlaces: null,
     sideNavOpen: 'open',
-    google: null
+    google: null,
+    offline: true
   }
 
   componentDidMount() {
     const googleMapsPromise = helpers.getGoogleMaps()
-    const fqPlacesPromise = helpers.getFourSquarePlaces()
+    const fqPlacesPromise = this.state.offline ? this.state.locations : helpers.getFourSquarePlaces()
     Promise.all([
       googleMapsPromise,
       fqPlacesPromise
     ]).then(values => {
       const google = values[0]
       const places = values[1]
+      //console.log(places)
       const markers = []
       const infoBoxes = []
       const infoWindow = new google.maps.InfoWindow();
