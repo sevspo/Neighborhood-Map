@@ -100,4 +100,15 @@ button:focus {
   width: 0px
 }
 
+.place-attribution {
+  font-size: 13px;
+  font-weight: 300;
+  position: absolute;
+  bottom: 5px;
+}
+.place-attribution a {
+  font-weight: 500;
+  font-size: 15px;
+}
+
 /****************** Infowindow ******************/
