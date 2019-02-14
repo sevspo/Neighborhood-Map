@@ -42,14 +42,13 @@ class App extends Component {
       const google = values[0];
       const places = values[1];
       const markers = [];
-      const infoBoxes = [];
       const infoWindow = new google.maps.InfoWindow();
       const map = new google.maps.Map(document.getElementById('map'), {
         center: this.state.center,
         zoom: this.state.zoom,
         mapTypeControl: false,
       });
-      places.forEach(place => {
+      places.forEach(place => { //use Map??
         let marker = new google.maps.Marker({
           position: { lat: place.lat, lng: place.lng },
           map: map,
@@ -58,20 +57,15 @@ class App extends Component {
           animation: google.maps.Animation.DROP,
           visible: true,
         });
-        let infoWindowContent = `<div class='info-box'>
-        <h3 class='infobox-title'>${marker.name}</h3>
-        <img alt='${marker.name}' src='${place.photoURL}'/>
-        </div>`
         marker.addListener('click', () => {
-          this.showInfoWindow(marker, infoWindowContent)
+          this.showMarker(marker)
         });
         markers.push(marker)
-        infoBoxes.push({index: place.index, name: place.name, content: infoWindowContent})
+        
       })
       this.setState({
         map,
         markers,
-        infoBoxes,
         places,
         infoWindow,
         google
@@ -99,11 +93,28 @@ class App extends Component {
       infoWindow: closeInfowindow
     });
   }
+  /* Match the marker to a selected place  */
+  listItemClick = (place) => {
+    let selectedMarker = this.state.markers.filter(marker => marker.index === place.index)[0];
+    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.index ===place.index)[0];
+    this.showInfoWindow(selectedMarker, selectedInfobox.content);
+  }
+
+  createInfowindow = () => {
+    let infoWindowContent = `<div class='info-box'>
+        <h3 class='infobox-title'>${marker.name}</h3>
+        <img alt='${marker.name}' src='${place.photoURL}'/>
+        </div>`
+
+        infoBoxes.push({index: place.index, name: place.name, content: infoWindowContent})
+  }
+  
+  
   /* Show the marker of a selected Place
    * Show the infowindow of the selected Place
    * Set it's content
    * Animate the marker */
-  showInfoWindow = (marker, infoWindowContent) => {
+  showMarker = (marker) => {
     let updatedInfoWindow = this.state.infoWindow;
     updatedInfoWindow.marker = marker;
     updatedInfoWindow.setContent(infoWindowContent);
@@ -118,13 +129,7 @@ class App extends Component {
       infoWindow: updatedInfoWindow
     });
   }
-  /* Match the marker to a selected place  */
-  listItemClick = (place) => {
-    let selectedMarker = this.state.markers.filter(marker => marker.index === place.index)[0];
-    let selectedInfobox = this.state.infoBoxes.filter(infoBox => infoBox.index ===place.index)[0];
-    this.showInfoWindow(selectedMarker, selectedInfobox.content);
-  }
-  
+
   toggleSidenav = () => {
     let toggle = this.state.sideNavOpen === 'open' ? 'hidden' : 'open';
     this.setState({

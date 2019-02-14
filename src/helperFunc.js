@@ -16,12 +16,10 @@ export function getGoogleMaps() {
     document.body.appendChild(script);
   })
 }
-/* This helper function gets the info from Foursquare for reccomended places.
-* First it gets the places and we extract what we need for this app and also the place id
-* so we can then make a second request to the photos endpoint to retrieve an image url*/
+/* This helper function gets the info from Foursquare for reccomended places.*/
+const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB';
+const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H';
 export function getFourSquarePlaces() {
-  const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB';
-  const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H';
   const query = 'Top Picks';
   const city = 'Bern';
   const limit = 10; //The number of places to show in the app
@@ -30,6 +28,7 @@ export function getFourSquarePlaces() {
     .then(res => res.json())
     .then(res => res.response.groups[0].items)
     .then(res => {
+      //ToDo: Use Map?
       let places = [];
       res.forEach((elem, index) => {
         let obj = { 
@@ -43,24 +42,16 @@ export function getFourSquarePlaces() {
       })
       return places;
     })
-    .then(places => {
-      return Promise.all( 
-        places.map(place => { //For each place we make a photo request to the photo endpoint and return the updated places objects array
-          let url = `https://api.foursquare.com/v2/venues/${place.fsID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
-          return fetch(url)
-          .then(res => res.json())
-          .then(res => {
-            let picObj = res.response.photos.items[0];
-            //Check if there is at least one image for the location
-            let fotoURL = res.response.photos.items.length === 0 ? '' : `${picObj.prefix}300x300${picObj.suffix}`;
-            place = {
-              ...place,
-              photoURL: fotoURL
-            }
-            return place;
-          })
-        })
-      )
-    })
+  }
+  /*This Helper function gets the Impage URL from Foursquare*/
+  export function getFourSquareImages(placeID) {
+  const url = `https://api.foursquare.com/v2/venues/${placeID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
+  fetch(url)
+    .then(res => res.json())
+    .then(res => {
+      let picObj = res.response.photos.items[0];
+      //Check if there is at least one image for the location
+      let fotoURL = res.response.photos.items.length === 0 ? '' : `${picObj.prefix}300x300${picObj.suffix}`;
+      return fotoURL;
+    })  
 }
-
