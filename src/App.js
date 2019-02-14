@@ -17,7 +17,8 @@ class App extends Component {
     places: [],
     query: '',
     filteredPlaces: null,
-    sideNavOpen: 'open'
+    sideNavOpen: 'open',
+    google: null
   }
 
   componentDidMount() {
@@ -65,7 +66,8 @@ class App extends Component {
         markers,
         infoBoxes,
         places,
-        infoWindow
+        infoWindow,
+        google
       })
     }).catch(err => {
       //alert('We are very sorry, but the server cannot be reached at the moment')
@@ -97,7 +99,7 @@ class App extends Component {
     if (marker.getAnimation() !== null) {
        marker.setAnimation(null);
     } else {
-      marker.setAnimation(this.google.maps.Animation.BOUNCE);
+      marker.setAnimation(this.state.google.maps.Animation.BOUNCE);
     }
     setTimeout(() => { marker.setAnimation(null) }, 1500);
     this.setState({
