@@ -49,11 +49,9 @@ const url = `https://api.foursquare.com/v2/venues/${placeID}/photos?client_id=${
 return fetch(url)
   .then(res => res.json())
   .then(res => {
-    if (res.response.photos) {
-      let picObj = res.response.photos.items[0];
-      //Check if there is at least one image for the location
-      let fotoURL = res.response.photos.items.length === 0 ? '' : `${picObj.prefix}300x300${picObj.suffix}`;
-      return fotoURL;
-    }
+    //Check if there is at least one image for the location
+    let fotoURL = (!res.response.photos || res.response.photos.items.length === 0) ? '' : `${res.response.photos.items[0].prefix}300x300${res.response.photos.items[0].suffix}`;
+    return fotoURL;
+    
   }).catch(err => console.error('Foursquare Photo API Error: ' + err));  
 }
