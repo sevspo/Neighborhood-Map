@@ -42,16 +42,18 @@ export function getFourSquarePlaces() {
       })
       return places;
     })
-  }
-  /*This Helper function gets the Impage URL from Foursquare*/
-  export function getFourSquareImages(placeID) {
-  const url = `https://api.foursquare.com/v2/venues/${placeID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
-  fetch(url)
-    .then(res => res.json())
-    .then(res => {
+}
+/*This Helper function gets the Impage URL from Foursquare*/
+export function getFourSquareImages(placeID) {
+const url = `https://api.foursquare.com/v2/venues/${placeID}/photos?client_id=${public_KEY}&client_secret=${secret_KEY}&v=20190207&limit=1`
+return fetch(url)
+  .then(res => res.json())
+  .then(res => {
+    if (res.response.photos) {
       let picObj = res.response.photos.items[0];
       //Check if there is at least one image for the location
       let fotoURL = res.response.photos.items.length === 0 ? '' : `${picObj.prefix}300x300${picObj.suffix}`;
       return fotoURL;
-    })  
+    }
+  }).catch(err => console.error('Foursquare Photo API Error: ' + err));  
 }
