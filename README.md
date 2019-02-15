@@ -4,7 +4,8 @@
 ## Overview
 
 Our assignment:   
-Build a sigle page applicaton using React that shows places we would like to visit a map.   
+Build a sigle page applicaton using React that shows places we would like to visit on a map.  
+Also show those palces in a listview.  
 Show additional information about that place form a third pary API.  
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -12,6 +13,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 The app shows a number of places in my hometown Bern, Switzerland.  
 In the map view you can click on markers to show additional information and a picture of the venue.  
 In a listview you can search the list of places and only those that match will be shown in the list as well on the map.
+
+## Applied JS Language Features
+* Promises
+* Fetch API
+* Arrow functions
+* Higher order Array Methods
 
 ## Dependencies
 * React
