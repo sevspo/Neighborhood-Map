@@ -108,11 +108,20 @@ class App extends Component {
     }
     helpers.getFourSquareImages(marker.placeID)
       .then(res => {
+        if (res === '') {
+        let infoWindowContent = `<div class='info-box'>
+        <h3 class='infobox-title'>${marker.name}</h3>
+        <p>No Image available</p>
+        <img alt='${marker.name}' src='${res}'/>
+        </div>`
+        this.showMarker(marker, infoWindowContent)
+        } else {
         let infoWindowContent = `<div class='info-box'>
         <h3 class='infobox-title'>${marker.name}</h3>
         <img alt='${marker.name}' src='${res}'/>
         </div>`
         this.showMarker(marker, infoWindowContent)
+      }
       })
   }
 
