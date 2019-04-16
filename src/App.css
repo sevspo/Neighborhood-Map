@@ -39,6 +39,8 @@ button:focus {
 }
 /*************** SideNavigation ***************/
 .sidenav {
+  display: flex;
+  flex-direction: column;
   color: white;
   height: 90vh;
   position: fixed;
@@ -50,13 +52,16 @@ button:focus {
   transition: 0.3s;
 }
 .filter-input {
+  width: 200px;
+  margin-left: 40px;
   border-radius: 3px;
   border: none;
-  height: 30px;
+  min-height: 30px;
   text-align: center;
   font-weight: 500;
 }
 .location-list {
+  flex: 1 0 auto;
   list-style-type: none;
   margin: 50px 0 0;
 }
@@ -84,13 +89,16 @@ button:focus {
   width: 0px
 }
 .place-attribution {
+  flex-shrink: 0;
   font-size: 13px;
   font-weight: 300;
-  position: absolute;
+  /* position: static; */
   bottom: 5px;
   width: 280px;
 }
 .place-attribution a {
+  cursor: pointer;
+  color: blue;
   font-weight: 500;
   font-size: 15px;
 }
