@@ -10,15 +10,15 @@ export function getGoogleMaps() {
     };
     //this creates the tag to load the script and that then executes the callback
     const script = document.createElement("script");
-    const API_Key = 'AIzaSyDfACHz7WdXnHXZpb_GVORIz4s0gfpChOo';
+    const API_Key = 'YOUR_API_KEY';
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_Key}&callback=resolveGoogleMapsPromise`;
     script.async = true;
     document.body.appendChild(script);
   })
 }
 /* This helper function gets the info from Foursquare for reccomended places.*/
-const public_KEY = 'QWDB20KPEBGPCD0HXD1BFQ3FNSENVJF0DUFXAL2AJ2YIJBFB';
-const secret_KEY = 'GR0R3K52XY0AVDGF3PVL3TCQ1ERH4WGU02L01SRARNVCT33H';
+const public_KEY = 'YOUR_API_KEY';
+const secret_KEY = 'YOUR_API_KEY';
 export function getFourSquarePlaces() {
   const query = 'Top Picks';
   const city = 'Bern';
